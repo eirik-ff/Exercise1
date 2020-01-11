@@ -6,7 +6,7 @@ To complete this exercise you will have to use git. Create one or several commit
 When answering the questions, remember to use all the resources at your disposal. Asking the internet isn't a form of "cheating", it's a way of learning.
 
  ### What is concurrency? What is parallelism? What's the difference?
- > Concurrency is multiple computers running at the same time, but can work on different tasks. It is used in networks as well as multiple cores in a single computer. Concurrency is a form of multitasking. A concurrent program can be run with a single or with multiple cores, where the latter will help with a speed increase. 
+ > Concurrency is multiple computers (CPUs) running at the same time, but can work on different tasks. It is used in networks as well as multiple cores in a single computer. Concurrency is a form of multitasking. A concurrent program can be run with a single or with multiple cores, where the latter will help with a speed increase. 
  > Parallelism is splitting a certain task into smaller subtasks that are solved simultaneously and combined later to provide an answer to the task. 
  > For later reference: 
  > * https://wiki.haskell.org/Parallelism_vs._Concurrency 
@@ -31,17 +31,21 @@ When answering the questions, remember to use all the resources at your disposal
  > A _green thread_ is scheduled by a VM or library instead of by the OS scheduler. This adds the ability to use multithreading where it is otherwise not supported. 
  
  > A _coroutine_ is a subroutine which yields when it is done and is not interrupted by the scheduler. This means it can finish its task and then yield for another coroutine to run. 
+
+ > For future reference: 
+ > * https://stackoverflow.com/questions/3324643/processes-threads-green-threads-protothreads-fibers-coroutines-whats-the 
  
  ### Which one of these do `pthread_create()` (C/POSIX), `threading.Thread()` (Python), `go` (Go) create?
- > * `pthread_create()`: 
- > * `threading.Thread()`: 
+ > * `pthread_create()`: Threads
+ > * `threading.Thread()`: Threads
  > * `go`: Green threads
  
  ### How does pythons Global Interpreter Lock (GIL) influence the way a python Thread behaves?
- > *Your answer here*
+ > The GIL makes it so only one thread can run the Python interpreter at the time, so it effectivly blocks Python applications from running multi threaded. 
  
  ### With this in mind: What is the workaround for the GIL (Hint: it's another module)?
- > *Your answer here*
+ > A workaround for the GIL is to use the `multiprocessing` module instead of `threading`. This creates two Python processes instead of two threads, meaning they have their own Python interpreter and thus their own memory space. Performance is somewhat better, but switching between two processes have more overhead than switching between two threads. 
+ > For later reference: https://realpython.com/python-gil/ 
  
  ### What does `func GOMAXPROCS(n int) int` change? 
- > *Your answer here*
+ > The function limits the number of operating system threads the Go process can use. 
